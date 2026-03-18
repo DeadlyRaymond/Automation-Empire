@@ -1,0 +1,29 @@
+name: Dhaka-Cumilla Weather Tracker
+on:
+  schedule:
+    - cron: '0 0,5,10,15,20 * * *' 
+  workflow_dispatch:
+
+jobs:
+  track_weather:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Fetch Weather Data
+        run: |
+          export TZ='Asia/Dhaka'
+          echo "--- Weather Update: $(date) ---" >> weather_logs.txt
+          echo "Dhaka: $(curl -s "wttr.in/Dhaka?format=%t&m")" >> weather.txt
+          echo "Cumilla: $(curl -s "wttr.in/Comilla?format=%t&m")" >> weather.txt
+          echo "------------------------------------------" >> weather_logs.txt
+          echo -e "\n" >> weather_logs.txt
+          
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Weather-Bot"
+          git add weather_logs.txt
+          git commit -m "Weather Sync: $(export TZ='Asia/Dhaka'; date)"
+          git push

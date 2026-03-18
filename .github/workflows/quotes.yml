@@ -1,0 +1,27 @@
+name: Daily Quotes Bot
+on:
+  schedule:
+    - cron: '0 1,6,9,13,18,21 * * *'
+  workflow_dispatch:
+
+jobs:
+  fetch_quote:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Get a Random Quote
+        run: |
+          export TZ='Asia/Dhaka'
+          echo "--- Thought of the Moment: $(date) ---" >> quotes.txt
+          curl -s "https://api.quotable.io/random" | jq -r '.content + " — " + .author' >> quotes.txt
+          echo -e "\n------------------------------------------\n" >> quotes.txt
+          
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Quotes-Bot"
+          git add quotes.txt
+          git commit -m "Quote Sync: $(export TZ='Asia/Dhaka'; date)"
+          git push

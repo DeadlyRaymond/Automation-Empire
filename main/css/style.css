@@ -1,0 +1,124 @@
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Font Face for Logo */
+@font-face {
+    font-family: 'GoogleSans';
+    src: url('../assets/fonts/GoogleSans-Regular.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #171616;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Navbar Style */
+header {
+    padding: 20px 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: rgba(23, 22, 22, 0.95);
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'GoogleSans', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 30px;
+    display: flex;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ccc;
+    transition: 0.3s;
+}
+
+/* Active Link Styling */
+.nav-links a.active {
+	background-color: #f00c0c;
+	color: #ffffff;
+	border-radius: 8px;
+	padding: 10px 20px;
+	font-weight: bold;
+	transition: all 0.3s ease;
+}
+
+.nav-links li a:hover:not(.active) {
+    color: #f00c0c;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+}
+
+.nav-links a:hover {
+    color: #fff;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+}
+
+/* Responsive Menu (Mobile) */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    .hamburger {
+        display: block;
+    }
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+}
